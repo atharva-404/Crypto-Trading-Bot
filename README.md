@@ -33,7 +33,7 @@ binance_bot/
 ## ⚙️ Installation
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/atharva-404/Crypto-Trading-Bot
 cd binance_bot
 python -m venv venv
 source venv/bin/activate        # On Linux/Mac
