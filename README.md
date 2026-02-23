@@ -89,6 +89,7 @@ All activity is logged to `logs/bot.log`. Example:
 2025-06-22 10:01:24 - ERROR - Order failed: Invalid quantity
 ```
 
+
 ---
 
 
