@@ -78,7 +78,6 @@ Enter side (BUY/SELL): BUY
 Enter order type (MARKET/LIMIT): MARKET
 Enter quantity: 0.001
 ```
-
 ---
 
 ## 📒 Logging
