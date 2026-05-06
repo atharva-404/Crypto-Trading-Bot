@@ -92,7 +92,6 @@ All activity is logged to `logs/bot.log`. Example:
 ---
 
 
-
 ## 🧪 Requirements
 
 ```text
