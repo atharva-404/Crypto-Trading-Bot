@@ -1,4 +1,5 @@
 
+
 # 🚀 Binance Futures Trading Bot (Testnet)
 
 A simplified crypto trading bot that uses the Binance Futures **Testnet API** to place **MARKET** and **LIMIT** orders with basic CLI and logging support.
