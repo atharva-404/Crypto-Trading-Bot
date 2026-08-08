@@ -17,7 +17,6 @@ A simplified crypto trading bot that uses the Binance Futures **Testnet API** to
 ---
 
 
-
 ## 📁 Project Structure
 
 ```
