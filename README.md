@@ -19,6 +19,7 @@ A simplified crypto trading bot that uses the Binance Futures **Testnet API** to
 ## 📁 Project Structure
 
 ```
+
 binance_bot/
 ├── bot.py               # Core trading logic
 ├── config.py            # API credentials & base URL
