@@ -6,6 +6,7 @@ A simplified crypto trading bot that uses the Binance Futures **Testnet API** to
 
 --- 
 
+
 ## 🛠️ Features
 
 - ✅ Place **Market** and **Limit** orders (BUY/SELL)
