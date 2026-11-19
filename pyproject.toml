@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "binance-futures-testnet-bot"
+version = "1.0.0"
+description = "A small, safe CLI for placing orders on the Binance Futures Testnet."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Atharva" }]
+keywords = ["binance", "futures", "testnet", "trading-bot", "crypto", "cli"]
+dependencies = ["python-binance>=1.0.19", "python-dotenv>=1.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.4"]
+
+[project.scripts]
+binance-bot = "binance_bot.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/atharva-404/Crypto-Trading-Bot"
+Issues = "https://github.com/atharva-404/Crypto-Trading-Bot/issues"
+
+[tool.setuptools]
+packages = ["binance_bot"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

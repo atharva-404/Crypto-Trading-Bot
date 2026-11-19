@@ -1,108 +1,100 @@
+# Binance Futures Testnet Bot
 
+[![CI](https://github.com/atharva-404/Crypto-Trading-Bot/actions/workflows/ci.yml/badge.svg)](https://github.com/atharva-404/Crypto-Trading-Bot/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 
-# 🚀 Binance Futures Trading Bot (Testnet)
+A small command-line tool for placing and managing orders on the **Binance Futures Testnet**. Practice with fake money, with input validation, clear errors and full request logging.
 
-A simplified crypto trading bot that uses the Binance Futures **Testnet API** to place **MARKET** and **LIMIT** orders with basic CLI and logging support.
+> **Disclaimer:** This is a learning project built out of curiosity. It has no trading strategy and is not financial advice. It targets the testnet by default. Don't use it with real funds.
 
---- 
+## Features
 
+- MARKET, LIMIT and STOP (stop-limit) orders, BUY or SELL
+- Subcommands to check price, balance, open orders, order status, and to cancel orders
+- `--dry-run` to validate an order without sending it
+- Interactive mode for guided input
+- Input validation with precise `Decimal` handling (no float rounding)
+- Credentials read from environment variables or `.env`, never from source code
+- Rotating log file at `logs/bot.log` with every request, response and error
+- Unit tests and CI on Python 3.9, 3.11 and 3.12
 
-## 🛠️ Features
-
-- ✅ Place **Market** and **Limit** orders (BUY/SELL)
-- ✅ CLI input interface
-- ✅ Logs all API requests, responses, and errors to `logs/bot.log`
-- ✅ Clean, reusable, and modular code structure
-- ✅ Supports Binance Futures **Testnet**
-
----
-
-
-## 📁 Project Structure
-
-
-```
-
-binance_bot/
-├── bot.py               # Core trading logic
-├── config.py            # API credentials & base URL
-├── logger.py            # Logging setup
-├── main.py              # CLI entry point
-├── requirements.txt     # Required Python packages
-└── logs/
-    └── bot.log          # Log file for all orders/errors
-```
-
----
-
-## ⚙️ Installation
+## Install
 
 ```bash
-git clone https://github.com/atharva-404/Crypto-Trading-Bot
-cd binance_bot
+git clone https://github.com/atharva-404/Crypto-Trading-Bot.git
+cd Crypto-Trading-Bot
 python -m venv venv
-source venv/bin/activate        # On Linux/Mac
-venv\Scripts\activate         # On Windows
-pip install -r requirements.txt
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -e .
 ```
 
----
+## Set up credentials
 
-## 🔐 Setup
-
-1. Create a [Binance Futures Testnet](https://testnet.binancefuture.com/) account.
-2. Generate API key & secret.
-3. Paste them into `config.py`:
-```python
-API_KEY = 'your_testnet_api_key'
-API_SECRET = 'your_testnet_api_secret'
-```
-
----
-
-## ▶️ How to Run
+1. Create an account at the [Binance Futures Testnet](https://testnet.binancefuture.com/) and generate an API key and secret.
+2. Copy the example file and fill it in:
 
 ```bash
-python main.py
+cp .env.example .env            # Windows: copy .env.example .env
 ```
 
-You'll be asked to enter:
-- Trading pair (e.g. BTCUSDT)
-- Side (BUY/SELL)
-- Order Type (MARKET/LIMIT)
-- Quantity
-- Price (only if LIMIT)
-
----
-
-## 📄 Example CLI Interaction
-
-```
-Enter symbol (e.g., BTCUSDT): BTCUSDT
-Enter side (BUY/SELL): BUY
-Enter order type (MARKET/LIMIT): MARKET
-Enter quantity: 0.001
-```
----
-
-## 📒 Logging
-
-All activity is logged to `logs/bot.log`. Example:
-```
-2025-06-22 10:01:23 - INFO - Order placed: {...}
-2025-06-22 10:01:24 - ERROR - Order failed: Invalid quantity
+```env
+BINANCE_API_KEY=your_testnet_api_key
+BINANCE_API_SECRET=your_testnet_api_secret
 ```
 
+`.env` is git-ignored.
 
----
+## Usage
 
+```bash
+# Market order
+python -m binance_bot place --symbol BTCUSDT --side BUY --type MARKET --quantity 0.01
 
-## 🧪 Requirements
+# Limit order
+python -m binance_bot place --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.01 --price 70000
 
-```text
-python-binance==1.0.17
+# Stop-limit order
+python -m binance_bot place --symbol BTCUSDT --side SELL --type STOP --quantity 0.01 --price 59900 --stop-price 60000
+
+# Validate only
+python -m binance_bot place --symbol BTCUSDT --side BUY --type MARKET --quantity 0.01 --dry-run
+
+# Other commands
+python -m binance_bot price BTCUSDT
+python -m binance_bot balance
+python -m binance_bot orders --symbol BTCUSDT
+python -m binance_bot status BTCUSDT 123456
+python -m binance_bot cancel BTCUSDT 123456
+python -m binance_bot interactive
 ```
 
----
+After `pip install -e .` you can also use the shorter `binance-bot` command. Add `-v` to print log lines to the console.
 
+## Project structure
 
+```
+binance_bot/
+  bot.py          # FuturesBot: API wrapper
+  cli.py          # argparse command-line interface
+  config.py       # loads credentials from env / .env
+  logger.py       # rotating file logger
+  validation.py   # input validation
+tests/            # pytest suite (no network needed)
+```
+
+## Development
+
+```bash
+pip install -e ".[dev]"
+ruff check .
+pytest
+```
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE)
